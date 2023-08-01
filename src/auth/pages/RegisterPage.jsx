@@ -2,24 +2,46 @@ import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/useForm";
+import { useState } from "react";
 
 const formData = {
-  email: "alexoliva@gmail.com",
-  password: "123456",
-  displayName: "Alex Oliva",
+  email: '',
+  password: '',
+  displayName: '',
+};
+
+const formValidations = {
+  email: [(value) => value.includes("@"), "El correo debe de tener una @"],
+  password: [ (value) => value.length >= 6, "El password debe contener al menos 6 caractéres"],
+  displayName: [(value) => value.length >= 3, "El nombre es obligatorio"],
 };
 
 export const RegisterPage = () => {
-  const { displayName, email, password, onInputChange, formState } =
-    useForm(formData);
+
+  const [formSubmitted, setformSubmitted] = useState(false);
+
+
+  const {
+    formState,
+    displayName,
+    email,
+    password,
+    onInputChange,
+    isFormValid,
+    displayNameValid,
+    emailValid,
+    passwordValid,
+  } = useForm(formData, formValidations);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setformSubmitted(true);
     console.log(formState);
   };
 
   return (
     <AuthLayout title="Crear Cuenta">
+
       <form onSubmit={onSubmit}>
         {/* Textfields section */}
         <Grid container>
@@ -32,6 +54,8 @@ export const RegisterPage = () => {
               name="displayName"
               value={displayName}
               onChange={onInputChange}
+              error={!!displayNameValid && formSubmitted}
+              helperText={displayNameValid}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -43,6 +67,8 @@ export const RegisterPage = () => {
               name="email"
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
             />
           </Grid>
 
@@ -55,6 +81,8 @@ export const RegisterPage = () => {
               name="password"
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
             />
           </Grid>
 
