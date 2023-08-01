@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Navbar } from "../../ui";
+
 import { StockPage, SearchPage } from "../pages";
+import Navbar from '../../ui/components/Navbar';
 
 
 export const StockRoutes = () => {

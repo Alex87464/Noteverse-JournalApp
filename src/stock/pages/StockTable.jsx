@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
