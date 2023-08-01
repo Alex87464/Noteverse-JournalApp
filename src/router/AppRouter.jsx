@@ -1,32 +1,16 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import { LoginPage } from '../auth';
-import { PrivateRoute } from './PrivateRoute';
-import { PublicRoute } from './PublicRoute';
-import { StockRoutes } from '../stock';
+import { AuthRoutes } from "../auth/routes/AuthRoutes";
+import { StockRoutes } from "../stock/routes/StockRoutes";
 
 export const AppRouter = () => {
   return (
-    <>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
+    <Routes>
+      {/* Login y Registro */}
+      <Route path="/auth/*" element={<AuthRoutes />} />
 
-        <Route
-          path="/*"
-          element={
-            <PrivateRoute>
-              <StockRoutes />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </>
+      {/* JournalApp */}
+      <Route path="/*" element={<StockRoutes />} />
+    </Routes>
   );
 };
