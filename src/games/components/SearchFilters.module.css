@@ -1,0 +1,63 @@
+/* SearchFilters.module.css */
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f6f5f0;
+    /* border-radius: 6px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
+  }
+  
+  label {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+  
+  /* Styling the select dropdown arrow */
+  select::-ms-expand {
+    display: none; /* Hide default arrow in Internet Explorer */
+  }
+  
+  select::after {
+    content: "\25BC"; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; /* This ensures the arrow doesn't interfere with the select click */
+  }
+  
+  /* Styling options */
+  option {
+    font-size: 14px;
+  }
+  
+  /* Custom button style */
+  button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
