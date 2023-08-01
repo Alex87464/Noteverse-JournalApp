@@ -1,9 +1,19 @@
-
-import { makeStyles } from '@mui/styles';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox';
-import CategoryIcon from '@mui/icons-material/Category';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { makeStyles } from "@mui/styles";
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import InboxIcon from "@mui/icons-material/Inbox";
+import CategoryIcon from "@mui/icons-material/Category";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import StoreIcon from "@mui/icons-material/Store";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import BarChartIcon from "@mui/icons-material/BarChart"; // Importa el icono de análisis de ventas
+import SearchIcon from "@mui/icons-material/Search"; // Importa el icono de búsqueda de producto
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -19,27 +29,51 @@ const Navbar = () => {
     <Drawer variant="permanent" className={classes.drawer}>
       <div className={classes.toolbar} />
       <List>
-        <ListItem button>
+        <ListItemButton>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Productos" />
-        </ListItem>
-        <ListItem button>
+        </ListItemButton>
+        <ListItemButton>
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
           <ListItemText primary="Categorías" />
-        </ListItem>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <BarChartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Análisis de Ventas" />
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <SearchIcon />
+          </ListItemIcon>
+          <ListItemText primary="Buscar Producto" />
+        </ListItemButton>
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItemButton>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
           <ListItemText primary="Carrito de compras" />
-        </ListItem>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <StoreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Inventario" />
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemIcon>
+            <ReceiptIcon />
+          </ListItemIcon>
+          <ListItemText primary="Órdenes de Compra" />
+        </ListItemButton>
       </List>
     </Drawer>
   );

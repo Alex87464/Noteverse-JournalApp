@@ -37,8 +37,10 @@ export const StockPage = () => {
   ];
 
   return (
-    <div>
+    <div style={{ marginLeft: '240px', padding: '16px' }}>
+      {/* Ajusta el valor del margen izquierdo según el ancho de tu Navbar */}
       <h1>Stock Page</h1>
+      <p>Aquí debajo se verá la tabla con los datos de la ropa en stock</p>
       <StockTable data={stockData} />
     </div>
   );
