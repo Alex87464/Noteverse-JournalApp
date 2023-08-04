@@ -2,7 +2,7 @@ import { IconButton } from '@mui/material';
 import { AddOutlined } from "@mui/icons-material";
 
 import { StockLayout } from "../layout/StockLayout";
-import { NoteView, NothingSelectedView } from "../views";
+import { ClotheView, NothingSelectedView } from "../views";
 import { useDispatch, useSelector } from 'react-redux';
 import { startNewClothe } from '../../store/stock/thunks';
 
@@ -26,7 +26,7 @@ export const StockPage = () => {
       
       {
         (!!active)
-          ? <NoteView/>
+          ? <ClotheView/>
           : <NothingSelectedView/>
       }
 
