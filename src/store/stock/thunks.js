@@ -34,3 +34,15 @@ export const startNewClothe = () => {
     }
         
 }
+
+
+export const startLoadingClothes = () => {
+    return async(dispatch, getState) => {
+
+        const { uid } = getState().auth;
+        if (!uid ) throw new Error('El UID del usuario no existe');
+
+        console.log({uid})
+
+    }
+}
