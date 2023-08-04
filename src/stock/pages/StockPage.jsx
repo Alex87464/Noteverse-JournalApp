@@ -9,7 +9,7 @@ import { startNewClothe } from '../../store/stock/thunks';
 export const StockPage = () => {
 
   const dispatch = useDispatch();
-  const { isSaving } = useSelector( state => state.stock);
+  const { isSaving, active } = useSelector( state => state.stock);
 
   const onClickNewClothe = () => {
     dispatch( startNewClothe() );
@@ -19,10 +19,19 @@ export const StockPage = () => {
     <StockLayout>
 
 
-      {/* <Typography>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae corporis voluptatibus nemo officiis numquam exercitationem repudiandae eveniet consequuntur. In, inventore laboriosam fugiat odio recusandae aliquid officiis rerum iste atque alias.</Typography> */}
+    
+    {/* Si hay una nota activa mostrar el NoteView 
+      caso contrario mostra NothingSelectedView*/}
       {/* Nothing selected */}
-      <NothingSelectedView/>
-      {/* <NoteView/> */}
+      
+      {
+        (!!active)
+          ? <NoteView/>
+          : <NothingSelectedView/>
+      }
+
+      
+      
       
       <IconButton
       onClick={onClickNewClothe}
