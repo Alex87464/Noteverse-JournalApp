@@ -1,6 +1,6 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyClothe, savingNewClothe, setActiveClothe, setClothes } from "./";
+import { addNewEmptyClothe, savingNewClothe, setActiveClothe, setClothes, setSaving, updateClothe } from "./";
 import { loadClothes } from "../../helpers/loadClothes";
 
 export const startNewClothe = () => {
@@ -48,4 +48,24 @@ export const startLoadingClothes = () => {
         dispatch( setClothes( clothes ) )
 
     }
+}
+
+export const startSaveClothe = ( ) => {
+    return async( dispatch, getState ) => { 
+
+        dispatch( setSaving() );
+
+        const { uid } = getState().auth;
+        const { active:clothe } = getState().stock;
+
+        const clotheToFireStore = { ...clothe };
+        delete clotheToFireStore.id;
+        
+        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${ clothe.id }` );
+        await setDoc( docRef, clotheToFireStore, {merge: true })
+
+        dispatch( updateClothe( clothe ) );
+        
+    }
+
 }

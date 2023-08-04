@@ -1,13 +1,16 @@
 import { SaveOutlined } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography } from "@mui/material"
-import { ImageGallery } from "../components"
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from '../../hooks/useForm';
-import { useSelector } from "react-redux";
-import { useMemo } from "react";
+import { ImageGallery } from "../components"
+import { setActiveClothe } from "../../store/stock/stockSlice";
+import { startSaveClothe } from "../../store/stock";
 
 
 export const ClotheView = () => {
 
+    const dispatch = useDispatch();
     const { active:clothe } = useSelector(state => state.stock);
 
     const { body, title, date, onInputChange, formState } = useForm( clothe );
@@ -17,7 +20,16 @@ export const ClotheView = () => {
         return newDate.toUTCString();
     }, [date] )
     
+
+    useEffect( ()=> {
+        dispatch( setActiveClothe(formState) );
+
+    },[formState])
     
+    const onSaveClothe = () => {
+        dispatch( startSaveClothe() );
+    }
+
     return (
     <Grid 
         container
@@ -33,7 +45,11 @@ export const ClotheView = () => {
         </Grid>
 
         <Grid item>
-            <Button color="primary" sx={{ p: 2 }}>
+            <Button 
+                onClick={ onSaveClothe }
+                color="primary" 
+                sx={{ p: 2 }}
+            >
                 <SaveOutlined sx={{ fontSize: 30, mr: 1 }}/>
                 Guardar
             </Button>

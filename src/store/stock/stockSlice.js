@@ -32,10 +32,19 @@ export const stockSlice = createSlice({
             state.clothes = action.payload;
         },
         setSaving: (state ) =>{
-
+            state.isSaving = true;
+            // TODO: mensaje de error
         },
-        updateClothe: (state, action) => {
+        updateClothe: (state, action) => { // payload: note
+            state.isSaving = false; 
+            state.clothes = state.clothes.map( clothe => {
 
+                if ( clothe.id === action.payload.id ) {
+                    return action.payload;
+                }
+                return clothe;
+            });
+            // Todo: Mostrar msje de actualizacion
         },
         deleteClotheById: (state, action) => {
 
