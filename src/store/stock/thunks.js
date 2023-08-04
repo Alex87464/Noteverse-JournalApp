@@ -1,7 +1,18 @@
-export const startNewClothe = () => {
+import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { FirebaseDB } from "../../firebase/config";
+import { addNewEmptyClothe, savingNewClothe, setActiveClothe } from "./";
 
-    return async( dispatch ) => {
+export const startNewClothe = () => {
+    return async( dispatch, getState ) => {
+
+
+        // Todo: tarea dispatch
+        dispatch( savingNewClothe() );
+
         // uid del usuario
+        const { uid } = getState().auth;
+
+
 
         const newClothe = {
             title: '',
@@ -9,12 +20,17 @@ export const startNewClothe = () => {
             date: new Date().getTime(),
         }
 
+        const newDoc = doc( collection( FirebaseDB, `${uid}/stock/clothes`) )
+        const setDocResp = await setDoc(newDoc, newClothe);
 
+        newClothe.id = newDoc.id;
+        
+        dispatch( addNewEmptyClothe( newClothe ) );
+        dispatch( setActiveClothe( newClothe ) );
+        
+        // dispatch( newClothe )
+        // dispatch( activarClothe )
+        
     }
-
-    //! dispatch 
-    // dispatch( newClothe )
-    // dispatch( activarClothe )
-
-
+        
 }

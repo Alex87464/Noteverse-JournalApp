@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const stockSlice = createSlice({
     name: 'stock',
     initialState: {
-        isSaving: true,
+        isSaving: false,
         messageSaved: '',
         clothes: [],
         active: null,
@@ -18,11 +18,15 @@ export const stockSlice = createSlice({
         
     },
     reducers: {
-        addNewClothe: (state, action ) => {
-
+        savingNewClothe: ( state ) => { 
+            state.isSaving = true;
+        },
+        addNewEmptyClothe: (state, action ) => {
+            state.clothes.push( action.payload )
+            state.isSaving = false;
         },
         setActiveClothe: (state, action ) => {
-
+            state.active = action.payload;
         },
         setClothes: (state, action) => {
 
@@ -42,10 +46,11 @@ export const stockSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-    addNewClothe,
+    addNewEmptyClothe,
+    deleteClotheById,
+    savingNewClothe,
     setActiveClothe,
     setClothes,
     setSaving,
-    updateClothe,
-    deleteClotheById
+    updateClothe
 } = stockSlice.actions;
