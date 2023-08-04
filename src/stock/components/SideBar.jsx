@@ -26,12 +26,16 @@ import DashboardIcon from "@mui/icons-material/Dashboard"; // Icono de Dashboard
 import PeopleIcon from "@mui/icons-material/People"; // Icono de Clientes
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Icono de Cerrar Sesión
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useSelector } from "react-redux";
 
 const cerrarMensaje = () => {
     console.log('cerrar sesion');
 }
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+
+  const { displayName } = useSelector( state => state.auth )
+
   return (
     <Box
       component="nav"
@@ -47,7 +51,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Alex Oliva
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />
