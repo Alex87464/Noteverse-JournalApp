@@ -1,11 +1,12 @@
-import { TurnedInNot } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+
+import { startLogout } from "../../store/auth/thunks";
+
 import {
   Box,
   Divider,
   Drawer,
-  Grid,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -26,13 +27,15 @@ import DashboardIcon from "@mui/icons-material/Dashboard"; // Icono de Dashboard
 import PeopleIcon from "@mui/icons-material/People"; // Icono de Clientes
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Icono de Cerrar Sesión
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useSelector } from "react-redux";
 
-const cerrarMensaje = () => {
-    console.log('cerrar sesion');
-}
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch( startLogout() );
+  }
 
   const { displayName } = useSelector( state => state.auth )
 
@@ -148,7 +151,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
           </ListItemIcon>
           <ListItemText primary={`Bienvenido, Alex`} />
         </ListItemButton>
-        <ListItemButton onClick={cerrarMensaje}> {/*handleLogout*/}
+        <ListItemButton onClick={onLogout}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
