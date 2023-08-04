@@ -1,6 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyClothe, savingNewClothe, setActiveClothe } from "./";
+import { addNewEmptyClothe, savingNewClothe, setActiveClothe, setClothes } from "./";
+import { loadClothes } from "../../helpers/loadClothes";
 
 export const startNewClothe = () => {
     return async( dispatch, getState ) => {
@@ -42,7 +43,9 @@ export const startLoadingClothes = () => {
         const { uid } = getState().auth;
         if (!uid ) throw new Error('El UID del usuario no existe');
 
-        console.log({uid})
+        const clothes = await loadClothes(uid);
+
+        dispatch( setClothes( clothes ) )
 
     }
 }

@@ -29,7 +29,7 @@ export const stockSlice = createSlice({
             state.active = action.payload;
         },
         setClothes: (state, action) => {
-
+            state.clothes = action.payload;
         },
         setSaving: (state ) =>{
 
