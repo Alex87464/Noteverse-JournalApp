@@ -1,7 +1,11 @@
-import { SaveOutlined } from "@mui/icons-material"
-import { Button, Grid, TextField, Typography } from "@mui/material"
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material"
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.css';
+
 import { useForm } from '../../hooks/useForm';
 import { ImageGallery } from "../components"
 import { setActiveClothe } from "../../store/stock/stockSlice";
@@ -11,7 +15,7 @@ import { startSaveClothe } from "../../store/stock";
 export const ClotheView = () => {
 
     const dispatch = useDispatch();
-    const { active:clothe } = useSelector(state => state.stock);
+    const { active:clothe, messageSaved, isSaving} = useSelector(state => state.stock);
 
     const { body, title, date, onInputChange, formState } = useForm( clothe );
     
@@ -20,14 +24,30 @@ export const ClotheView = () => {
         return newDate.toUTCString();
     }, [date] )
     
+    const fileInputRef = useRef();
 
     useEffect( ()=> {
         dispatch( setActiveClothe(formState) );
 
     },[formState])
     
+    useEffect( ()=> {
+        if ( messageSaved.length > 0 ) {
+            Swal.fire('Nota actualizada', messageSaved, "success")
+        }
+    },[messageSaved])
+
+
+    
     const onSaveClothe = () => {
         dispatch( startSaveClothe() );
+    }
+
+    const onFileInputChange = ({target}) => {
+        if(target.files === 0) return;
+
+        console.log('subiendo archivos');
+
     }
 
     return (
@@ -45,7 +65,25 @@ export const ClotheView = () => {
         </Grid>
 
         <Grid item>
-            <Button 
+
+            <input
+                type="file"
+                multiple
+                ref={ fileInputRef }
+                onChange={ onFileInputChange }
+                style={{ display: "none" }}
+            />
+
+            <IconButton
+                color="primary"
+                disabled={ isSaving }
+                onClick={ () => fileInputRef.current.click() }
+            >
+                <UploadOutlined/>
+            </IconButton>
+            
+            <Button
+                disabled={ isSaving }
                 onClick={ onSaveClothe }
                 color="primary" 
                 sx={{ p: 2 }}

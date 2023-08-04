@@ -27,13 +27,14 @@ export const stockSlice = createSlice({
         },
         setActiveClothe: (state, action ) => {
             state.active = action.payload;
+            state.messageSaved = '';
         },
         setClothes: (state, action) => {
             state.clothes = action.payload;
         },
         setSaving: (state ) =>{
             state.isSaving = true;
-            // TODO: mensaje de error
+            state.messageSaved = '';
         },
         updateClothe: (state, action) => { // payload: note
             state.isSaving = false; 
@@ -45,6 +46,7 @@ export const stockSlice = createSlice({
                 return clothe;
             });
             // Todo: Mostrar msje de actualizacion
+            state.messageSaved = `${action.payload.title}, actualizada correctamente`
         },
         deleteClotheById: (state, action) => {
 
@@ -55,11 +57,11 @@ export const stockSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-    addNewEmptyClothe,
-    deleteClotheById,
     savingNewClothe,
+    addNewEmptyClothe,
     setActiveClothe,
     setClothes,
     setSaving,
-    updateClothe
+    updateClothe,
+    deleteClotheById
 } = stockSlice.actions;

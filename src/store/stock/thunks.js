@@ -6,15 +6,12 @@ import { loadClothes } from "../../helpers/loadClothes";
 export const startNewClothe = () => {
     return async( dispatch, getState ) => {
 
-
         // Todo: tarea dispatch
         dispatch( savingNewClothe() );
 
         // uid del usuario
         const { uid } = getState().auth;
-
-
-
+        
         const newClothe = {
             title: '',
             body: '',
@@ -65,7 +62,7 @@ export const startSaveClothe = ( ) => {
         await setDoc( docRef, clotheToFireStore, {merge: true })
 
         dispatch( updateClothe( clothe ) );
-        
+
     }
 
 }
