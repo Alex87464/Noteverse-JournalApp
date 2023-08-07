@@ -2,6 +2,7 @@ import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { addNewEmptyClothe, savingNewClothe, setActiveClothe, setClothes, setSaving, updateClothe } from "./";
 import { loadClothes } from "../../helpers/loadClothes";
+import { fileUpload } from "../../helpers/fileUpload";
 
 export const startNewClothe = () => {
     return async( dispatch, getState ) => {
@@ -65,4 +66,15 @@ export const startSaveClothe = ( ) => {
 
     }
 
+}
+
+
+export const startUploadingFiles = ( files = []) => {
+    return async(dispatch ) => {
+        dispatch( setSaving() );
+        
+        await fileUpload( files[0] );
+
+
+    }
 }

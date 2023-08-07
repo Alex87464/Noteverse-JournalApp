@@ -9,7 +9,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks/useForm';
 import { ImageGallery } from "../components"
 import { setActiveClothe } from "../../store/stock/stockSlice";
-import { startSaveClothe } from "../../store/stock";
+import { startSaveClothe, startUploadingFiles } from "../../store/stock";
 
 
 export const ClotheView = () => {
@@ -46,7 +46,7 @@ export const ClotheView = () => {
     const onFileInputChange = ({target}) => {
         if(target.files === 0) return;
 
-        console.log('subiendo archivos');
+        dispatch( startUploadingFiles( target.files ) )
 
     }
 
