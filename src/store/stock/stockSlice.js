@@ -48,9 +48,13 @@ export const stockSlice = createSlice({
             // Todo: Mostrar msje de actualizacion
             state.messageSaved = `${action.payload.title}, actualizada correctamente`
         },
-        deleteClotheById: (state, action) => {
+        setPhotosToActiveNote: (state, action) => {
+            state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
+            state.isSaving = false;
+        },
+        // deleteClotheById: (state, action) => {
 
-        }
+        // }
     }
 });
 
@@ -63,5 +67,6 @@ export const {
     setClothes,
     setSaving,
     updateClothe,
-    deleteClotheById
+    deleteClotheById,
+    setPhotosToActiveNote
 } = stockSlice.actions;
