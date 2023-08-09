@@ -120,7 +120,8 @@ export const ClotheView = () => {
         </Grid>
 
         {/* Image gallery */}
-        <ImageGallery/>
+        <ImageGallery  images={ clothe.imageUrls }
+        />
 
     </Grid>
   )
