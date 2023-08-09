@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material"
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material"
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css';
@@ -9,7 +9,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import { useForm } from '../../hooks/useForm';
 import { ImageGallery } from "../components"
 import { setActiveClothe } from "../../store/stock/stockSlice";
-import { startSaveClothe, startUploadingFiles } from "../../store/stock";
+import { startDeletingClothe, startSaveClothe, startUploadingFiles } from "../../store/stock";
 
 
 export const ClotheView = () => {
@@ -45,9 +45,11 @@ export const ClotheView = () => {
 
     const onFileInputChange = ({target}) => {
         if(target.files === 0) return;
-
         dispatch( startUploadingFiles( target.files ) )
+    }
 
+    const onDelete = () => {
+        dispatch( startDeletingClothe() );
     }
 
     return (
@@ -119,9 +121,19 @@ export const ClotheView = () => {
             />
         </Grid>
 
+        <Grid container justifyContent='end'>
+            <Button 
+                onClick={ onDelete }
+                sx={{ mt: 2 }}
+                color="error"
+            >
+                <DeleteOutline />
+                Borrar
+            </Button>
+        </Grid>
+
         {/* Image gallery */}
-        <ImageGallery  images={ clothe.imageUrls }
-        />
+        <ImageGallery  images={ clothe.imageUrls } />
 
     </Grid>
   )

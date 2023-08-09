@@ -1,6 +1,6 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyClothe, savingNewClothe, setActiveClothe, setClothes, setPhotosToActiveNote, setSaving, updateClothe } from "./";
+import { addNewEmptyClothe, deleteClotheById, savingNewClothe, setActiveClothe, setClothes, setPhotosToActiveNote, setSaving, updateClothe } from "./";
 import { loadClothes } from "../../helpers/loadClothes";
 import { fileUpload } from "../../helpers/fileUpload";
 
@@ -83,6 +83,21 @@ export const startUploadingFiles = ( files = []) => {
         const photosUrls = await Promise.all( fileUploadPromises );
         
         dispatch( setPhotosToActiveNote( photosUrls ) )
+
+    }
+}
+
+
+export const startDeletingClothe = () => {
+    return async(dispatch, getState) => {
+
+        const {uid} = getState().auth;
+        const { active: clothe } = getState().stock;
+
+        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${clothe.id}`);
+        await deleteDoc( docRef );
+
+        dispatch( deleteClotheById(clothe.id) );
 
     }
 }

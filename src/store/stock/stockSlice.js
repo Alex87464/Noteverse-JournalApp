@@ -52,21 +52,30 @@ export const stockSlice = createSlice({
             state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
             state.isSaving = false;
         },
-        // deleteClotheById: (state, action) => {
+        clearClothesLogout: (state) => {
+            state.isSaving = false;
+            state.messageSaved = '';
+            state.clothes = [];
+            state.active = null;
+        },
 
-        // }
+        deleteClotheById: (state, action) => {
+            state.active = null;
+            state.clothes = state.clothes.filter( clothe => clothe.id !== action.payload );
+        }
     }
 });
 
 
 // Action creators are generated for each case reducer function
 export const {
-    savingNewClothe,
     addNewEmptyClothe,
+    clearClothesLogout,
+    deleteClotheById,
+    savingNewClothe,
     setActiveClothe,
     setClothes,
+    setPhotosToActiveNote,
     setSaving,
     updateClothe,
-    deleteClotheById,
-    setPhotosToActiveNote
 } = stockSlice.actions;
