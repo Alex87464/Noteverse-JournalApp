@@ -8,16 +8,21 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 import { useForm } from '../../hooks/useForm';
 import { ImageGallery } from "../components"
-import { setActiveClothe } from "../../store/stock/stockSlice";
-import { startDeletingClothe, startSaveClothe, startUploadingFiles } from "../../store/stock";
 
 
-export const ClotheView = () => {
+
+import { setActiveNote } from "../../store/journal";
+import { startDeletingNote } from "../../store/journal";
+import { startSaveNote } from "../../store/journal";
+import { startUploadingFiles } from "../../store/journal";
+
+
+export const NoteView = () => {
 
     const dispatch = useDispatch();
-    const { active:clothe, messageSaved, isSaving} = useSelector(state => state.stock);
+    const { active:note, messageSaved, isSaving} = useSelector(state => state.journal);
 
-    const { body, title, date, onInputChange, formState } = useForm( clothe );
+    const { body, title, date, onInputChange, formState } = useForm( note );
     
     const dateString = useMemo( () => {
         const newDate = new Date( date );
@@ -27,7 +32,7 @@ export const ClotheView = () => {
     const fileInputRef = useRef();
 
     useEffect( ()=> {
-        dispatch( setActiveClothe(formState) );
+        dispatch( setActiveNote(formState) );
 
     },[formState])
     
@@ -39,8 +44,8 @@ export const ClotheView = () => {
 
 
     
-    const onSaveClothe = () => {
-        dispatch( startSaveClothe() );
+    const onSaveNote = () => {
+        dispatch( startSaveNote() );
     }
 
     const onFileInputChange = ({target}) => {
@@ -49,7 +54,7 @@ export const ClotheView = () => {
     }
 
     const onDelete = () => {
-        dispatch( startDeletingClothe() );
+        dispatch( startDeletingNote() );
     }
 
     return (
@@ -86,7 +91,7 @@ export const ClotheView = () => {
             
             <Button
                 disabled={ isSaving }
-                onClick={ onSaveClothe }
+                onClick={ onSaveNote }
                 color="primary" 
                 sx={{ p: 2 }}
             >
@@ -133,7 +138,7 @@ export const ClotheView = () => {
         </Grid>
 
         {/* Image gallery */}
-        <ImageGallery  images={ clothe.imageUrls } />
+        <ImageGallery  images={ note.imageUrls } />
 
     </Grid>
   )

@@ -1,22 +1,24 @@
 import { IconButton } from '@mui/material';
 import { AddOutlined } from "@mui/icons-material";
 
-import { StockLayout } from "../layout/StockLayout";
-import { ClotheView, NothingSelectedView } from "../views";
+import { JournalLayout } from "../layout/JournalLayout";
+import { NoteView, NothingSelectedView } from "../views";
 import { useDispatch, useSelector } from 'react-redux';
-import { startNewClothe } from '../../store/stock/thunks';
+import { startNewClothe } from '../../store/journal/thunks';
 
-export const StockPage = () => {
+
+
+export const JournalPage = () => {
 
   const dispatch = useDispatch();
-  const { isSaving, active } = useSelector( state => state.stock);
+  const { isSaving, active } = useSelector( state => state.journal);
 
-  const onClickNewClothe = () => {
+  const onClickNewNote = () => {
     dispatch( startNewClothe() );
   }
 
   return (
-    <StockLayout>
+    <JournalLayout>
 
 
     
@@ -26,7 +28,7 @@ export const StockPage = () => {
       
       {
         (!!active)
-          ? <ClotheView/>
+          ? <NoteView/>
           : <NothingSelectedView/>
       }
 
@@ -34,7 +36,7 @@ export const StockPage = () => {
       
       
       <IconButton
-      onClick={onClickNewClothe}
+      onClick={onClickNewNote}
       disabled={ isSaving }
         size="large"
         sx={{
@@ -49,6 +51,6 @@ export const StockPage = () => {
         <AddOutlined sx={{ fontSize: 30}} />
       </IconButton>
 
-    </StockLayout>
+    </JournalLayout>
   );
 };

@@ -1,68 +1,66 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyClothe, deleteClotheById, savingNewClothe, setActiveClothe, setClothes, setPhotosToActiveNote, setSaving, updateClothe } from "./";
-import { loadClothes } from "../../helpers/loadClothes";
+import { addNewEmptyNote, deleteNoteById, savingNewNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from "./";
 import { fileUpload } from "../../helpers/fileUpload";
+import { loadNotes } from '../../helpers/loadNotes';
 
 export const startNewClothe = () => {
     return async( dispatch, getState ) => {
 
         // Todo: tarea dispatch
-        dispatch( savingNewClothe() );
+        dispatch( savingNewNote() );
 
         // uid del usuario
         const { uid } = getState().auth;
         
-        const newClothe = {
+        const newNote = {
             title: '',
             body: '',
             date: new Date().getTime(),
         }
 
         const newDoc = doc( collection( FirebaseDB, `${uid}/stock/clothes`) )
-        const setDocResp = await setDoc(newDoc, newClothe);
+        const setDocResp = await setDoc(newDoc, newNote);
 
-        newClothe.id = newDoc.id;
+        newNote.id = newDoc.id;
         
-        dispatch( addNewEmptyClothe( newClothe ) );
-        dispatch( setActiveClothe( newClothe ) );
+        dispatch( addNewEmptyNote( newNote ) );
+        dispatch( setActiveNote( newNote ) );
         
-        // dispatch( newClothe )
-        // dispatch( activarClothe )
         
     }
         
 }
 
 
-export const startLoadingClothes = () => {
+export const startLoadingNotes = () => {
     return async(dispatch, getState) => {
 
         const { uid } = getState().auth;
         if (!uid ) throw new Error('El UID del usuario no existe');
 
-        const clothes = await loadClothes(uid);
+        const notes = await loadNotes(uid);
 
-        dispatch( setClothes( clothes ) )
+        dispatch( setNotes( notes ) )
 
     }
 }
 
-export const startSaveClothe = ( ) => {
+export const startSaveNote = ( ) => {
     return async( dispatch, getState ) => { 
 
         dispatch( setSaving() );
 
         const { uid } = getState().auth;
-        const { active:clothe } = getState().stock;
+        const { active:note } = getState().stock;
 
-        const clotheToFireStore = { ...clothe };
-        delete clotheToFireStore.id;
+        const noteToFireStore = { ...note };
+        delete noteToFireStore.id;
         
-        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${ clothe.id }` );
-        await setDoc( docRef, clotheToFireStore, {merge: true })
+        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${ note.id }` );
+        await setDoc( docRef, noteToFireStore, {merge: true })
 
-        dispatch( updateClothe( clothe ) );
+        dispatch( updateNote( note ) );
 
     }
 
@@ -88,16 +86,16 @@ export const startUploadingFiles = ( files = []) => {
 }
 
 
-export const startDeletingClothe = () => {
+export const startDeletingNote = () => {
     return async(dispatch, getState) => {
 
         const {uid} = getState().auth;
-        const { active: clothe } = getState().stock;
+        const { active: note } = getState().stock;
 
-        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${clothe.id}`);
+        const docRef = doc( FirebaseDB, `${uid}/stock/clothes/${note.id}`);
         await deleteDoc( docRef );
 
-        dispatch( deleteClotheById(clothe.id) );
+        dispatch( deleteNoteById(note.id) );
 
     }
 }

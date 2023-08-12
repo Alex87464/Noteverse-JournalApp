@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { startLogout } from "../../store/auth/thunks";
 
+import { SideBarItem } from "./SideBarItem";
+
 import {
   Box,
   Divider,
@@ -27,7 +29,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard"; // Icono de Dashboard
 import PeopleIcon from "@mui/icons-material/People"; // Icono de Clientes
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Icono de Cerrar Sesión
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { SideBarItem } from "./SideBarItem";
 
 
 export const SideBar = ({ drawerWidth = 240 }) => {
@@ -39,7 +40,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
   }
 
   const { displayName } = useSelector( state => state.auth )
-  const { clothes } = useSelector( state => state.stock )
+  const { notes } = useSelector( state => state.journal )
 
   return (
     <Box
@@ -62,16 +63,16 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         <Divider />
 
       
-        {/* CLOTHES TEMPORARY */}
+        {/* NOTES TEMPORARY */}
         <List>
       {
-            clothes.map(clothe => (
-              <SideBarItem key={clothe.id} {...clothe}/>
+            notes.map(note => (
+              <SideBarItem key={note.id} {...note}/>
             ))       
       }
         </List>
         <Divider />
-        {/* END CLOTHES */}
+        {/* END NOTES */}
 
 
         <List>

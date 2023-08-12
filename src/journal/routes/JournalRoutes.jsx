@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { StockPage } from "../pages/StockPage";
+import { JournalPage } from "../pages/JournalPage";
 
-export const StockRoutes = () => {
+export const JournalRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<StockPage />} />
+      <Route path="/" element={<JournalPage />} />
 
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>

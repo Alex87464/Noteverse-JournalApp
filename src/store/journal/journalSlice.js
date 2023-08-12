@@ -1,12 +1,12 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-export const stockSlice = createSlice({
-    name: 'stock',
+export const journalSlice = createSlice({
+    name: 'journal',
     initialState: {
         isSaving: false,
         messageSaved: '',
-        clothes: [],
+        notes: [],
         active: null,
         // active: {
         //     id: 'ABC123',
@@ -18,32 +18,32 @@ export const stockSlice = createSlice({
         
     },
     reducers: {
-        savingNewClothe: ( state ) => { 
+        savingNewNote: ( state ) => { 
             state.isSaving = true;
         },
-        addNewEmptyClothe: (state, action ) => {
-            state.clothes.push( action.payload )
+        addNewEmptyNote: (state, action ) => {
+            state.notes.push( action.payload )
             state.isSaving = false;
         },
-        setActiveClothe: (state, action ) => {
+        setActiveNote: (state, action ) => {
             state.active = action.payload;
             state.messageSaved = '';
         },
-        setClothes: (state, action) => {
-            state.clothes = action.payload;
+        setNotes: (state, action) => {
+            state.notes = action.payload;
         },
         setSaving: (state ) =>{
             state.isSaving = true;
             state.messageSaved = '';
         },
-        updateClothe: (state, action) => { // payload: note
+        updateNote: (state, action) => { // payload: note
             state.isSaving = false; 
-            state.clothes = state.clothes.map( clothe => {
+            state.notes = state.notes.map( note => {
 
-                if ( clothe.id === action.payload.id ) {
+                if ( note.id === action.payload.id ) {
                     return action.payload;
                 }
-                return clothe;
+                return note;
             });
             // Todo: Mostrar msje de actualizacion
             state.messageSaved = `${action.payload.title}, actualizada correctamente`
@@ -52,16 +52,16 @@ export const stockSlice = createSlice({
             state.active.imageUrls = [...state.active.imageUrls, ...action.payload];
             state.isSaving = false;
         },
-        clearClothesLogout: (state) => {
+        clearNotesLogout: (state) => {
             state.isSaving = false;
             state.messageSaved = '';
-            state.clothes = [];
+            state.notes = [];
             state.active = null;
         },
 
-        deleteClotheById: (state, action) => {
+        deleteNoteById: (state, action) => {
             state.active = null;
-            state.clothes = state.clothes.filter( clothe => clothe.id !== action.payload );
+            state.notes = state.notes.filter( note => note.id !== action.payload );
         }
     }
 });
@@ -69,13 +69,13 @@ export const stockSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-    addNewEmptyClothe,
-    clearClothesLogout,
-    deleteClotheById,
-    savingNewClothe,
-    setActiveClothe,
-    setClothes,
+    addNewEmptyNote,
+    clearNotesLogout,
+    deleteNoteById,
+    savingNewNote,
+    setActiveNote,
+    setNotes,
     setPhotosToActiveNote,
     setSaving,
-    updateClothe,
-} = stockSlice.actions;
+    updateNote,
+} = journalSlice.actions;
