@@ -1,2 +1,2 @@
-export * from './loadClothes';
+export * from './loadNotes';
 export * from './fileUpload';

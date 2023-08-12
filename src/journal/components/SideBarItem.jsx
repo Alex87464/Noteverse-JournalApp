@@ -7,28 +7,26 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useMemo } from "react";
-import { setActiveClothe } from "../../store/stock/stockSlice";
 import { useDispatch } from "react-redux";
+import { setActiveNote } from "../../store/journal/journalSlice";
 
-export const SideBarItem = ({ title, body, id, date, imageUrls = [] }) => {
+export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
 
   const dispatch = useDispatch()
 
-  const onClickClothe = () => {
-    dispatch( setActiveClothe({ title, body, id, date, imageUrls }) );
+  const onClickNote = () => {
+    dispatch( setActiveNote({ title, body, id, date, imageUrls }) );
   }
 
     const newTitle = useMemo( () => {
         return title.length > 17
           ? title.substring(0,17) + "..."
           : title;
-
-
     },[title])
 
   return (
     <ListItem disablePadding>
-      <ListItemButton onClick={onClickClothe}>
+      <ListItemButton onClick={onClickNote}>
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>
