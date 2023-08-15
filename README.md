@@ -18,9 +18,9 @@ Bienvenido a NoteVerse, la plataforma que te permite capturar y compartir tus mo
 
 ## Capturas de Pantalla
 
-![Captura 1](./public/screenshots/screen1.png)
+![Captura 1](./public/screenshots/screen1.webp)
 
-![Captura 2](./public/screenshots/screen2.png)
+![Captura 2](./public/screenshots/screen2.webp)
 
 ## Instalación
 
