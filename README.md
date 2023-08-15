@@ -33,8 +33,8 @@ Bienvenido a NoteVerse, la plataforma que te permite capturar y compartir tus mo
 
 ## Contacto
 
-¿Preguntas o comentarios? Puedes contactarnos en info@noteverse.com o visitar nuestro sitio web [www.noteverse.com](https://www.noteverse.com).
+¿Preguntas o comentarios? Puedes contactarme en alexoliva87464@gmail.com o visitar mi sitio web [www.alexoliva.me](https://www.alexoliva.me).
 
-## Licencia
+<!-- ## Licencia
 
-Este proyecto está bajo la Licencia XYZ. Ver el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la Licencia XYZ. Ver el archivo [LICENSE](LICENSE) para más detalles. -->
