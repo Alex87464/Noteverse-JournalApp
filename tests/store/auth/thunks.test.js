@@ -1,4 +1,6 @@
-import { checkingAuthentication, checkingCredentials } from "../../../src/store/auth";
+import { singInWithGoogle } from "../../../src/firebase/providers";
+import { checkingAuthentication, checkingCredentials, login, startGoogleSignIn } from "../../../src/store/auth";
+import { demoUser } from "../../fixtures/authFixtures";
 
 jest.mock('../../../src/firebase/providers')
 
@@ -15,5 +17,19 @@ describe('Pruebas en AuthThunks', () => {
         expect(dispatch).toHaveBeenCalledWith( checkingCredentials() )
 
     });
+
+
+    test('startGoogleSignin debe de llamar checkingCredentials y login', async() => {
+
+        const loginData = {ok: true, ...demoUser};
+        await singInWithGoogle.mockResolvedValue( loginData );
+
+        // thunk
+        await startGoogleSignIn()( dispatch );
+
+        expect(dispatch).toHaveBeenCalledWith( checkingCredentials() );
+        expect(dispatch).toHaveBeenCalledWith( login( loginData ) );
+
+    })
 
 });
