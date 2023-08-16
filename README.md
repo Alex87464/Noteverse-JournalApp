@@ -1,6 +1,5 @@
 # NoteVerse - Tu Espacio Creativo de Notas y Recuerdos
 
-![NoteVerse Logo](link_a_tu_logo.png)
 
 Bienvenido a NoteVerse, la plataforma que te permite capturar y compartir tus momentos más significativos de manera única. Con NoteVerse, puedes llevar un diario digital enriquecido con descripciones, títulos, imágenes y fechas, creando una experiencia de narración personalizada para tus recuerdos.
 
