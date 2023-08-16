@@ -12,8 +12,6 @@ Bienvenido a NoteVerse, la plataforma que te permite capturar y compartir tus mo
 
 - **Explora en el Tiempo:** Navega por tus recuerdos utilizando nuestra línea de tiempo interactiva y revive tus momentos especiales.
 
-- **Privacidad en tus Manos:** Controla la privacidad de tus notas, elige entre mantenerlas privadas o compartirlas con amigos seleccionados.
-
 - **Diseño Responsivo:** Disfruta de la misma experiencia fluida tanto en dispositivos móviles como en ordenadores de escritorio.
 
 ## Capturas de Pantalla
