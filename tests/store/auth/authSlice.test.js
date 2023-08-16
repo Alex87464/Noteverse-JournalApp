@@ -4,7 +4,7 @@ import { authenticatedState, demoUser, initialState } from "../../fixtures/authF
 describe('Pruebas en authSlice', () => {
 
 
-    test('debe retornarn el estado inicial y llamarse "auth"', () => {
+    test('debe retornar el estado inicial y llamarse "auth"', () => {
         
         const state = authSlice.reducer(initialState, {});
 
@@ -13,7 +13,7 @@ describe('Pruebas en authSlice', () => {
 
     });
 
-    test('Debe realizar la autenticación', () => {
+    test('debe realizar la autenticación', () => {
 
         const state = authSlice.reducer( initialState, login( demoUser ));
         expect( state ).toEqual({
