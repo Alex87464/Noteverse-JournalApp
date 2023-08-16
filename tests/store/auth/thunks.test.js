@@ -19,7 +19,7 @@ describe('Pruebas en AuthThunks', () => {
     });
 
 
-    test('startGoogleSigin debe de llamar checkingCredentials y login', async() => {
+    test('startGoogleSignin debe de llamar checkingCredentials y login', async() => {
 
         const loginData = {ok: true, ...demoUser};
         await singInWithGoogle.mockResolvedValue( loginData );
