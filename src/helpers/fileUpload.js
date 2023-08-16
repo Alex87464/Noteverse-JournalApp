@@ -1,9 +1,10 @@
 
 
 export const fileUpload = async( file ) => {
-    if ( !file ) throw new Error('No tenemos ningúna archivo a subir');
+    // if ( !file ) throw new Error('No tenemos ningúna archivo a subir');
+    if ( !file ) return null;
 
-    const cloudUrl = 'https://api.cloudinary.com/v1_1/cursos-udemy/upload';
+    const cloudUrl = 'https://api.cloudinary.com/v1_1/dkt4fvtpv/upload';
 
     const formData = new FormData();
     formData.append('upload_preset','react-journal');
@@ -23,8 +24,9 @@ export const fileUpload = async( file ) => {
         return cloudResp.secure_url;
 
     } catch (error) {
-        console.log(error);
-        throw new Error( error.message );
+        // console.log(error);
+        // throw new Error( error.message );
+        return null;
     }
 
 }
