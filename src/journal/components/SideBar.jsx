@@ -1,9 +1,17 @@
 import { useSelector } from 'react-redux';
-import { Box, Divider, Drawer, List, Toolbar, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Divider,
+  Drawer,
+  List,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import { SideBarItem } from './';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
-  const { displayName } = useSelector((state) => state.auth);
+  const { displayName, photoURL } = useSelector((state) => state.auth);
   const { notes } = useSelector((state) => state.journal);
 
   return (
@@ -20,9 +28,12 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         }}
       >
         <Toolbar>
-          <Typography variant='h6' noWrap component='div'>
-            {displayName}
-          </Typography>
+          <Box sx={{ display: 'flex', placeItems: 'center', gap: 1 }}>
+            <Avatar alt={displayName} src={photoURL} />
+            <Typography variant='h6' noWrap component='div'>
+              {displayName}
+            </Typography>
+          </Box>
         </Toolbar>
         <Divider />
 
