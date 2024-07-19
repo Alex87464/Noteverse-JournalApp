@@ -1,32 +1,26 @@
+export const fileUpload = async (file) => {
+  // if ( !file ) throw new Error('No tenemos ningúna archivo a subir');
+  if (!file) return null;
 
+  const cloudUrl = 'https://api.cloudinary.com/v1_1/dkt4fvtpv/upload';
 
-export const fileUpload = async( file ) => {
-    // if ( !file ) throw new Error('No tenemos ningúna archivo a subir');
-    if ( !file ) return null;
+  const formData = new FormData();
+  formData.append('upload_preset', 'react-journal');
+  formData.append('file', file);
 
-    const cloudUrl = 'https://api.cloudinary.com/v1_1/dkt4fvtpv/upload';
+  try {
+    const resp = await fetch(cloudUrl, {
+      method: 'POST',
+      body: formData,
+    });
 
-    const formData = new FormData();
-    formData.append('upload_preset','react-journal');
-    formData.append('file', file );
+    if (!resp.ok) throw new Error('No se pudo subir imagen');
+    const cloudResp = await resp.json();
 
-    try {
- 
-        const resp = await fetch( cloudUrl, {
-            method: 'POST',
-            body: formData
-        });
-
-
-        if ( !resp.ok ) throw new Error('No se pudo subir imagen')
-        const cloudResp = await resp.json();
-
-        return cloudResp.secure_url;
-
-    } catch (error) {
-        // console.log(error);
-        // throw new Error( error.message );
-        return null;
-    }
-
-}
+    return cloudResp.secure_url;
+  } catch (error) {
+    // console.log(error);
+    // throw new Error( error.message );
+    return null;
+  }
+};

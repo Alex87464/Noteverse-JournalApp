@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import { PostAdd, StarOutline } from '@mui/icons-material';
+import { PostAdd } from '@mui/icons-material';
 
 export const NothingSelectedView = () => {
   return (
