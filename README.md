@@ -1,5 +1,7 @@
 # NoteVerse - Tu Espacio Creativo de Notas y Recuerdos
 
+[Live Demo](https://journal-noteverse.netlify.app/)
+
 Bienvenido a NoteVerse, la plataforma que te permite capturar y compartir tus momentos más significativos de manera única. Con NoteVerse, puedes llevar un diario digital enriquecido con descripciones, títulos, imágenes y fechas, creando una experiencia de narración personalizada para tus recuerdos.
 
 ## Características Principales
